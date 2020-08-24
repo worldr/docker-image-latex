@@ -21,11 +21,11 @@ jobs:
       - name: Define tag.
         run:  echo "::set-env name=RELEASE_TAG::$(git describe --tags)"
       - name: Docker Hub registry login.
-        run:  docker login $REGISTRY_HOST --username $DOCKER_REGISTRY_USERNAME --password ${{secrets.DOCKER_HUB_PASSWORD}}
+        run:  docker login --username $DOCKER_REGISTRY_USERNAME --password ${{secrets.DOCKER_HUB_PASSWORD}}
       - name: Build the LaTeX image.
         run: |
-          docker build -t ${REGISTRY_HOST}/${REGISTRY_PATH}/latex:${RELEASE_TAG} -f Dockerfile .
+          docker build -t ${REGISTRY_PATH}/latex:${RELEASE_TAG} -f Dockerfile .
       - name: Release LaTeX image.
         run: |
-          docker push ${REGISTRY_HOST}/${REGISTRY_PATH}/latex:${RELEASE_TAG}
-          docker push ${REGISTRY_HOST}/${REGISTRY_PATH}/latex:latest
+          docker push ${REGISTRY_PATH}/latex:${RELEASE_TAG}
+          docker push ${REGISTRY_PATH}/latex:latest
