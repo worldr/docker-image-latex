@@ -8,16 +8,11 @@ Docker image for LaTeX builds.
 + Contains both `texlive-full` and `texlive-latex-extra`.
 + Contains a few other thing, notably [graphviz](https://graphviz.org/).
 
-## Push to docker hub
+## Release
 
-```bash
-docker build -t worldr/latex:tagname .
-docker login --username worldr --password-stdin
-docker push worldr/latex:tagname
-docker push new-repo:tagname
-```
-
-The Way Of Gitops tells us *this should be a GitHub action…*
+The Way Of Gitops tells us *this should be a GitHub action…* And we are: just
+create a tag with `bump2version` and GitHub action will kick in, build the
+image, and push it. You need do nothing else.
 
 ## Pre-commit
 
